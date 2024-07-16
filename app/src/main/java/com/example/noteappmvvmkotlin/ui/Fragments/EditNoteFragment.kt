@@ -35,7 +35,7 @@ class EditNoteFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentEditNoteBinding.inflate(layoutInflater, container, false)
         setHasOptionsMenu(true)
-        binding.edtTitle.setText (oldNotes.data.title)
+        binding.edtTitle.setText(oldNotes.data.title)
         binding.edtSubtitle.setText(oldNotes.data.subTitle)
         binding.edtNotes.setText(oldNotes.data.notes)
 
@@ -86,7 +86,6 @@ class EditNoteFragment : Fragment() {
         binding.btnEditNotes.setOnClickListener {
             updateNotes(it)
         }
-
         return binding.root
 
     }
@@ -119,23 +118,25 @@ class EditNoteFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.menu_delete){
-            val bottomSheet:BottomSheetDialog = BottomSheetDialog(requireContext(),R.style.BottomSheetStyle)
+        if (item.itemId == R.id.menu_delete) {
+            val bottomSheet: BottomSheetDialog =
+                BottomSheetDialog(requireContext(), R.style.BottomSheetStyle)
             bottomSheet.setContentView(R.layout.dialod_delete)
 
             val tvYes = bottomSheet.findViewById<TextView>(R.id.btnYes)
             val tvNo = bottomSheet.findViewById<TextView>(R.id.btnNo)
 
             tvYes?.setOnClickListener {
-            viewModel.deleteNotes(oldNotes.data.id!!)
+                viewModel.deleteNotes(oldNotes.data.id!!)
                 bottomSheet.dismiss()
 
-                Navigation.findNavController(it!!).navigate(R.id.action_editNoteFragment_to_homeFragment)
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_editNoteFragment_to_homeFragment)
 
 
             }
             tvNo?.setOnClickListener {
-            bottomSheet.dismiss()
+                bottomSheet.dismiss()
             }
 
             bottomSheet.show()
