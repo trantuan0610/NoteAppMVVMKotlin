@@ -2,6 +2,8 @@ package com.example.noteappmvvmkotlin.ui.Fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -12,9 +14,6 @@ import com.example.noteappmvvmkotlin.R
 import com.example.noteappmvvmkotlin.databinding.FragmentHomeBinding
 import com.example.noteappmvvmkotlin.ui.Adapter.NotesAdapter
 import com.example.noteappmvvmkotlin.viewModel.NotesViewModel
-import android.app.SearchManager;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 
 
 class HomeFragment : Fragment() {
@@ -29,7 +28,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         setHasOptionsMenu(true)
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
@@ -45,32 +43,30 @@ class HomeFragment : Fragment() {
         binding.filterHigh.setOnClickListener {
             viewModel.getHighNotes().observe(viewLifecycleOwner) { notesList ->
                 MyNotes = notesList as ArrayList<Notes>
-                adapter = NotesAdapter(requireContext(), notesList)
-                binding.rcvAllNotes.adapter = adapter
+                adapter.setItems(notesList)
 
             }
         }
         binding.filterMedium.setOnClickListener {
             viewModel.getMediumNotes().observe(viewLifecycleOwner) { notesList ->
                 MyNotes = notesList as ArrayList<Notes>
-                adapter = NotesAdapter(requireContext(), notesList)
-                binding.rcvAllNotes.adapter = adapter
+                adapter.setItems(notesList)
 
             }
         }
         binding.filterLow.setOnClickListener {
             viewModel.getLowNotes().observe(viewLifecycleOwner) { notesList ->
                 MyNotes = notesList as ArrayList<Notes>
-                adapter = NotesAdapter(requireContext(), notesList)
-                binding.rcvAllNotes.adapter = adapter
+                adapter.setItems(notesList)
 
             }
         }
         binding.getAllNotes.setOnClickListener {
             viewModel.getNotes().observe(viewLifecycleOwner) { notesList ->
                 MyNotes = notesList as ArrayList<Notes>
-                adapter = NotesAdapter(requireContext(), notesList)
-                binding.rcvAllNotes.adapter = adapter
+//                adapter = NotesAdapter(requireContext(), notesList)
+//                binding.rcvAllNotes.adapter = adapter
+                adapter.setItems(notesList)
             }
         }
         binding.btnAddNotes.setOnClickListener {

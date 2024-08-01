@@ -33,7 +33,6 @@
             android:background="@drawable/edt_txt_shape"
             android:hint="Subtitle.."
             android:fontFamily="@font/regular"
-
             android:maxLines="1"
             android:padding="14dp"
             android:textColorHint="@color/white" />

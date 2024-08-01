@@ -57,4 +57,9 @@ class NotesAdapter(val requireContext: Context, var notesList: List<Notes>) :
     }
 
     override fun getItemCount() = notesList.size
+
+    fun setItems(notesList: List<Notes>){
+        this.notesList = notesList
+        notifyDataSetChanged()
+    }
 }
